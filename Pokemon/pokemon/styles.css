@@ -1,0 +1,29 @@
+*{
+    box-sizing: content-box;
+    margin: 0;
+}
+.encabezado-ppal{
+    display: flex;
+    justify-content:space-between;
+    padding-right: 18px;
+    padding-left: 18px;
+    background-color: darkorchid;
+}
+
+.img{
+    height: 100px;
+    object-fit: cover;
+}
+#img-pokeball{
+    display: flex;
+    justify-content: end;
+}
+#img-poke{
+    display: flex;
+    justify-content: center;
+}
+
+.tipos{
+    display: flex;
+    flex-direction: row;
+}

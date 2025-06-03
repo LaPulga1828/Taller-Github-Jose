@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokecard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <section class="contend-ppal">
+        <div class="encabezado-ppal">
+            <div class="logo-name">
+                <img class="img" src="img/logo.pokemon.jpg.png" alt="logo">
+            </div>
+            <div>
+                <img class="img" src="img/charmander-bulbasaur-y-squirtle.jpg.png" alt="">
+            </div>
+            <div id="img-pokeball">
+                <img class="img" src="img/pokeball.jpg" alt="">
+            </div>
+        </div>
+    </section>
+
+    <section class="second-contain">
+        <h1 id="titulo"></h1>
+        <img src="" id="pok" alt="">
+        <div id="types"></div>
+
+        <div class="stadistics">
+
+        </div>
+
+
+        <div class="name-level-type">
+            <div class="number"></div>
+            <div class="type">Tipos del pokemon</div>
+            <div class="weakness">Debilidades</div>
+        </div>
+
+
+
+
+    </section>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+        const itemType = { name: "", color: '#000' }
+        let ramdomId = Math.floor(Math.random() * (1025 - 1 + 1) + 1);
+        //let ramdomId = 1;
+        document.addEventListener("DOMContentLoaded", async () => {
+            const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${ramdomId}`)
+            console.log(res);
+            document.getElementById("titulo").textContent = res.data.name
+            document.getElementById("pok").src = res.data.sprites.other.home.front_default
+            let colors = []
+            res.data.types.forEach((item, i) => {
+                let color = getColorsByType(item.type.name)
+                colors.push(color)
+                document.getElementById("types").innerHTML += `
+                    <button 
+                        id="boton" 
+                        style="background-color: ${color}; color: black; padding: 10px; border: none; border-radius: 5px;"
+                    >
+                        ${item.type.name}
+                    </button>
+                `
+            })
+            let elemento = document.getElementById("pok")
+            if (colors.length == 1) {
+                elemento.style.background = `${colors[0]}`;
+            } else {
+                elemento.style.background =  `linear-gradient(${colors[0]}, ${colors[1]})`;
+            }
+        })
+
+
+        function getColorsByType(type) {
+            const colors = {
+                grass: '#9bcc50',
+                poison: '#b97fc9',
+                // Añade más tipos aquí
+            };
+            return colors[type] || '#000'; // Si no existe, devuelve negro
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokecard</title>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <h1 id="titulo"></h1>
+    <img src="" id="pok" alt="">
+    <script>
+
+        document.addEventListener("DOMContentLoaded", async()=>{
+            let res = await axios.get("https://pokeapi.co/api/v2/pokemon/ditto")
+            console.log(res);
+            document.getElementById("titulo").textContent=res.data.name
+            document.getElementById("pok").src = res.data.sprites.other.home.front_default
+        })
+        
+    </script>
+</body>
+</html>
